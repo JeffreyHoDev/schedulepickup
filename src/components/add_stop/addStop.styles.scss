@@ -1,0 +1,16 @@
+.add_stop_component {
+    width: 100%;
+    text-align: center;
+
+    .add_stop_form_container {
+        display: flex;
+        justify-content: space-evenly;
+
+        .add_stop_left_column {
+            width: 40%;
+        }
+        .add_stop_right_column {
+            width: 55%;
+        }
+    }
+}
