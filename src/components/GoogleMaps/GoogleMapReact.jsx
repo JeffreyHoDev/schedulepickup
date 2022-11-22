@@ -1,7 +1,10 @@
 import GoogleMapReact from 'google-map-react';
 import './map.css'
 
-const GoogleMapContainer = ({ setMapObj, setMapsObj }) => {
+import Marker from '../mapMarker/mapmarker.component';
+
+const GoogleMapContainer = ({ setMapObj, setMapsObj, pickupList, mapObj, mapsObj }) => {
+
 
     const defaultProps = {
         center: {
@@ -15,7 +18,7 @@ const GoogleMapContainer = ({ setMapObj, setMapsObj }) => {
         <div className='map-container'>
             <GoogleMapReact 
                 bootstrapURLKeys={{
-                    key: "AIzaSyDr5VKsAqZqgN8zfppjow65NxlgfiB8pds", 
+                    key: process.env.REACT_APP_GOOGLE_API_KEY, 
                     language: 'en'
                 }}
                 defaultZoom={defaultProps.zoom} 
@@ -26,6 +29,11 @@ const GoogleMapContainer = ({ setMapObj, setMapsObj }) => {
                     setMapsObj(maps)
                 }}
             >
+                {
+                    pickupList.map((pickup, index) => {
+                        return <Marker key={`pickup-marker-${index}`} lat={pickup.lat} order={index+1} lng={pickup.lng} pickup={pickup}/>
+                    })
+                }
             </GoogleMapReact>
             
 

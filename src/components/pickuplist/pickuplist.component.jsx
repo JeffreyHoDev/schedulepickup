@@ -13,7 +13,7 @@ const PickupListComponent = ({ pickupList }) => {
                     pickupList.length > 0 ? (
                         pickupList.map((pickup, index) => {
                             return (
-                                <ListGroup.Item as="li">
+                                <ListGroup.Item as="li" key={`listgroup-item-${index}`}>
                                     <div className='pickup-detail'>
                                         <div className='info-section'>
                                             <p>{`${index+1}. Location: ${pickup.locationName}, ${pickup.postalCode}`}</p>
@@ -23,7 +23,8 @@ const PickupListComponent = ({ pickupList }) => {
                                         </div>
                                         <div className='action-section'>
                                             <img src={TrashIcon} alt="trash-icon"/>
-                                            <img src={DownArrow} alt="down-arrow"/>
+                                            {index === 0 ? null : <img src={UpArrow} alt="up-arrow"/>}
+                                            {index === pickupList.length - 1 ? null : <img src={DownArrow} alt="down-arrow"/>}
                                         </div>
                                     </div>
                                 </ListGroup.Item>
