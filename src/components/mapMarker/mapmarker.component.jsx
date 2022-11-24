@@ -12,7 +12,7 @@ const Marker = ({ pickup, order }) => {
             
             <div className='marker' onClick={() => setShowInfo(!showInfo)}>
                 <div className='icon'>
-                    <img src={LocationPin} alt="marker"/>
+                    <img className='icon-pic' src={LocationPin} alt="marker"/>
                     <h1 className='icon-order'>{order}</h1>
                 </div>
                 { showInfo ? (

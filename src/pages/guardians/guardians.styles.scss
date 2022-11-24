@@ -1,0 +1,32 @@
+.guardians-page-container {
+    width: 100vw;
+    max-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-guardian {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 5rem;
+    z-index: 500;
+}
+
+.guardian-input-section {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.add-passenger-section {
+    display: flex;
+    flex-direction: column;
+
+    .passenger-list-section {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+}
