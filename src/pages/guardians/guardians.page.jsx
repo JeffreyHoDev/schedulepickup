@@ -5,6 +5,8 @@ import { Button } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
+import TrashIcon from '../../assets/trash.svg'
+
 import { useState } from 'react'
 
 
@@ -22,7 +24,7 @@ const GuardiansPage = () => {
 
     let PassengerInput = ({ index }) => {
 
-        const [inputValue, setInputValue] = useState('')
+        const [inputValue, setInputValue] = useState(passengerDetails[index])
         const customInputHandler = (e, index) => {
             passengerDetails[index] = e.target.value
             setInputValue(e.target.value) // To cause previous retrigger, or else when user typing it wont display on input element
@@ -30,8 +32,8 @@ const GuardiansPage = () => {
 
         return (
             <div className='passenger-input-actions-section'>
-                <input type="text" value={passengerDetails[index]} onChange={(e) => customInputHandler(e, index)} placeholder="Passenger name"/>
-                <span onClick={(e) => deleteHandler(e, index)}>Delete</span>
+                <input type="text" value={inputValue} onChange={(e) => customInputHandler(e, index)} placeholder="Passenger name"/>
+                <img style={{cursor: 'pointer'}}src={TrashIcon} alt="remove-icon" onClick={(e) => deleteHandler(e, index)} />
             </div>
         )
     }
@@ -47,7 +49,21 @@ const GuardiansPage = () => {
             <div className='guardians-page-container'>
                 <h4>Guardians</h4>
                 <Button onClick={handleShow}>Add a Guardian</Button>
-                <TableComponent />
+                <TableComponent 
+                    headers={[{label: 'Index', 'field': 'index'}, {label: 'Guardian Name', 'field': 'guardian'}, {label: 'Email', field: 'email'}, {label: 'Passengers', field: 'passengers'}]}
+                    data={[
+                        {
+                        "guardian": 'John',
+                        "email": 'john@hotmail.com',
+                        "passengers": 'John, Damn, You'
+                        },
+                        {
+                        "guardian": 'John',
+                        "email": 'john@hotmail.com',
+                        "passengers": 'Sui, Siao, Yeng'
+                        }
+                    ]}
+                />
             </div>
             <Modal
                 show={show}

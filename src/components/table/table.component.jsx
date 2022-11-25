@@ -2,46 +2,40 @@ import './table.styles.scss'
 
 import Table from 'react-bootstrap/Table'
 
-const TableComponent = ({ headers, data }) => {
+const TableComponent = ({ headers, data, components }) => {
     return (
         <>
             <div className='table-component'>
                 <Table striped responsive>
                     <thead>
                         <tr>
-                        <th>#</th>
-                        <th>Guardian</th>
-                        <th>Passengers List</th>
-                        <th>Contact</th>
-                        <th>Email</th>
-                        <th>Action</th>
+                            {
+                                headers.map((header,index) => {
+                                    return <th key={`header-key-${index}`}>{header.label}</th>
+                                })
+                            }
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Jeff, John, Adam</td>
-                            <td>84276055</td>
-                            <td>mark@dummy.com</td>
-                            <td>Action</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Ron</td>
-                            <td>Jeff, John, Adam</td>
-                            <td>84276055</td>
-                            <td>ron@dummy.com</td>
-                            <td>Action</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Paul</td>
-                            <td>Jeff, John, Adam</td>
-                            <td>84276055</td>
-                            <td>paul@dummy.com</td>
-                            <td>Action</td>
-                        </tr>
+                        {
+                            data.map((single, index) => {
+                                return (
+                                    <tr key={`row-data-${index}`}>
+                                        {<td>{index+1}</td>}
+                                        {
+                                            headers.map((header, subIndex) => {
+                                                return (
+                                                    header.field === 'index'? null : <td key={`data-table-key-${subIndex}`}>{single[header.field]}</td>
+                                                )
+                                            })
+                                        }
+                                        <td>{components}</td>
+                                    </tr>
+                                )
+
+                            })
+                        }
                     </tbody>
                 </Table>
             </div>

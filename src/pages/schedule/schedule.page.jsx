@@ -101,6 +101,7 @@ const SchedulePage = () => {
                 </div>
                 <div className="schedule-page-right-column">
                     <h5>Pickup Summary</h5>
+                    <p>-- Please note that <b>switching order of pickup points</b> will switch interchangeably for <b>Pick Up Time</b> as well --</p>
                     <PickupListComponent pickupList={pickupList} deleteHandler={deleteHandler} moveDownHandler={moveDownHandler} moveUpHandler={moveUpHandler}/>
                 </div>
             </div>
