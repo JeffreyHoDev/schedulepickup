@@ -49,12 +49,6 @@ const App = () => {
     <div className="App">
       <NavbarComponent />
       <RouterProvider router={router} />
-      {/* <GuardiansPage /> */}
-      {/* <DriversPage /> */}
-      {/* <VehiclesPage /> */}
-      {/* <TripsPage /> */}
-      {/* <AssignmentPage /> */}
-      {/* <SchedulePage/> */}
     </div>
   );
 }
