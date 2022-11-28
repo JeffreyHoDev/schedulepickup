@@ -1,21 +1,29 @@
 import './trips.styles.scss'
 
 import TableComponent from '../../components/table/table.component'
-import { Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+
+import EditIcon from '../../assets/icons8-edit-64.png'
+import TrashIcon from '../../assets/trash.svg'
 
 const TripsPage = () => {
 
-    const CustomActionComponent = () => {
+    const CustomActionComponent = ({ index }) => {
 
         const customFunction = () => console.log("I am clicked!")
-        return <span onClick={customFunction}>Action</span>
+        return (
+            <div className='action-group'>
+                <img className='action-group-icon' alt="edit-icon" src={EditIcon} onClick={customFunction} />
+                <img className='action-group-icon' alt="trash-icon" src={TrashIcon} onClick={customFunction} />
+            </div>
+        )
     }
 
     return (
         <>
             <div className='trips-page-container'>
                 <h4>Trips</h4>
-                <Button href='schedule'>Create New Trip</Button>
+                <Link to="/schedule">Create New Trip</Link>
                 <TableComponent 
                     headers={[{label: 'Index', 'field': 'index'}, {label: 'Trip Name', 'field': 'trip'}, {label: 'Description', field: 'desc'}, {label: 'Created Date', field: 'createdDate'}]}
                     data={[
@@ -30,7 +38,7 @@ const TripsPage = () => {
                         "createdDate": "11-10-2022"
                         }
                     ]}
-                    components={<CustomActionComponent/>}
+                    Components={CustomActionComponent}
                 />
             </div>
         </>

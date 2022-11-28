@@ -6,6 +6,9 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup';
 
+import EditIcon from '../../assets/icons8-edit-64.png'
+import TrashIcon from '../../assets/trash.svg'
+
 import { useState } from 'react'
 
 const AssignmentPage = () => {
@@ -13,6 +16,17 @@ const AssignmentPage = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const CustomActionComponent = ({ index }) => {
+
+        const customFunction = () => console.log("I am clicked!")
+        return (
+        <div className='action-group'>
+            <img className='action-group-icon' alt="edit-icon" src={EditIcon} onClick={customFunction} />
+            <img className='action-group-icon' alt="trash-icon" src={TrashIcon} onClick={customFunction} />
+        </div>
+        )
+    }
 
     return (
         <>
@@ -49,6 +63,7 @@ const AssignmentPage = () => {
                                 "endDate": "01-04-2022"
                             },
                         ]}
+                        Components={CustomActionComponent}
                     />
                 </div>
                 <Modal

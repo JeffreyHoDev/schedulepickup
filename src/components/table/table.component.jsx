@@ -2,7 +2,9 @@ import './table.styles.scss'
 
 import Table from 'react-bootstrap/Table'
 
-const TableComponent = ({ headers, data, components }) => {
+const TableComponent = ({ headers, data, Components }) => {
+
+
     return (
         <>
             <div className='table-component'>
@@ -30,7 +32,7 @@ const TableComponent = ({ headers, data, components }) => {
                                                 )
                                             })
                                         }
-                                        <td>{components}</td>
+                                        <td><Components index={index}/></td>
                                     </tr>
                                 )
 
