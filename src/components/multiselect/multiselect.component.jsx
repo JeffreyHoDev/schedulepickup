@@ -1,11 +1,14 @@
 import './multiselect.styles.scss'
 import { default as ReactSelect } from "react-select";
+import { useSelector } from 'react-redux';
+import { selectPassengers } from '../../redux/addStop/addStop.selector'
 
-const MultiSelectComponent = ({ passengers, passengersHandler, optionList }) => {
+const MultiSelectComponent = ({ passengersHandler, optionList }) => {
     
     const handler = (passengerListDetails) => {
         passengersHandler(passengerListDetails)
     }
+    const passengers = useSelector(selectPassengers)
 
     return (
         <>

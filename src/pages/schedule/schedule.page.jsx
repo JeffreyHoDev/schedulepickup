@@ -8,6 +8,9 @@ import './schedule.styles.scss'
 import { useState } from "react"
 import { Button } from "react-bootstrap"
 
+import { useSelector } from "react-redux"
+import { getTripInfo } from '../../redux/schedule/schedule.selector'
+
 const SchedulePage = () => {
     const colourOptions = [
         { value: "ocean", label: "Ocean" },
@@ -21,16 +24,18 @@ const SchedulePage = () => {
         { value: "slate", label: "Slate" },
         { value: "silver", label: "Silver" }
     ];
+
+    const tripInfo = useSelector(getTripInfo)
     const [mapObj, setMapObj] = useState(null)
     const [mapsObj, setMapsObj ] = useState(null)
     const [minTime, setMinTime] = useState(null)
     const [passengerList, setPassengerList] = useState(colourOptions) // get raw data
     const [optionList, setOptionList] = useState(passengerList) // set for filterable data
     const [pickupList, setPickupList] = useState([])
-    const [tripInfo, setTripInfo] = useState({
-        "tripName": "",
-        "description": ""
-    })
+    // const [tripInfo, setTripInfo] = useState({
+    //     "tripName": "",
+    //     "description": ""
+    // })
     const deleteHandler = (indexTobeDeleted) => {
         // Recover the passengers choice in optionList
         let passengersTobeRecovered = pickupList[indexTobeDeleted]["passengers"]
@@ -87,14 +92,14 @@ const SchedulePage = () => {
                     <h4>Schedule Pickups</h4>
                     <GoogleMapContainer setMapObj={setMapObj} setMapsObj={setMapsObj} mapObj={mapObj} mapsObj={mapsObj} pickupList={pickupList}/>
                     <div className="schedule-page-input-section">
-                        <ScheduleBasicInfoComponent setTripInfo={setTripInfo} tripInfo={tripInfo}/>
+                        <ScheduleBasicInfoComponent />
                         <AddStopComponent
-                        pickupList={pickupList} 
-                        setPickupList={setPickupList} 
-                        minTime={minTime} 
-                        setMinTime={setMinTime} 
-                        optionList={optionList} 
-                        setOptionList={setOptionList}
+                            pickupList={pickupList} 
+                            setPickupList={setPickupList} 
+                            minTime={minTime} 
+                            setMinTime={setMinTime} 
+                            optionList={optionList} 
+                            setOptionList={setOptionList}
                         />
                     </div>
                     <Button variant="success" type="button" onClick={submitHandler} style={{width: '100%'}}>Submit Trip Template</Button>

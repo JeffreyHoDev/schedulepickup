@@ -1,7 +1,11 @@
 import './schedule_basicInfo.styles.scss'
 import Form from 'react-bootstrap/Form';
+import { useDispatch } from 'react-redux';
 
-const ScheduleBasicInfoComponent = ({ setTripInfo, tripInfo }) => {
+import { setTripName, setTripDescription } from '../../redux/schedule/schedule.action'
+
+const ScheduleBasicInfoComponent = () => {
+    const dispatch = useDispatch()
     return (
         <>
             <div className='schedule-basicInfo-component'>
@@ -12,7 +16,7 @@ const ScheduleBasicInfoComponent = ({ setTripInfo, tripInfo }) => {
                         type="text"
                         id="trip_name"
                         aria-describedby="trip_help_block"
-                        onChange={(e) => setTripInfo({...tripInfo, "tripName": e.target.value})}
+                        onChange={(e) => dispatch(setTripName(e.target.value))}
                     />
                     <Form.Text id="trip_help_block" muted>
                         This will be the name of the template
@@ -25,7 +29,7 @@ const ScheduleBasicInfoComponent = ({ setTripInfo, tripInfo }) => {
                         rows={2}
                         id="trip_description"
                         aria-describedby="trip_description_help_block"
-                        onChange={(e) => setTripInfo({...tripInfo, "description": e.target.value})}
+                        onChange={(e) => dispatch(setTripDescription(e.target.value))}
                     />
                     <Form.Text id="trip_description_help_block" muted>
                         Description to explain about the trip

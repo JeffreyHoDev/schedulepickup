@@ -6,17 +6,23 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 
 import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAddStopDetails } from '../../redux/addStop/addStop.selector'
+import { updateLocationName, updatePassengers, updatePickupTime, updatePostalCode, updateRemark, clearStopDetails } from '../../redux/addStop/addStop.action'
 
-const AddStopComponent = ({ pickupList, setPickupList, setMinTime, minTime, optionList, setOptionList, passengerList, setPassengerList }) => {
+const AddStopComponent = ({ pickupList, setPickupList, setMinTime, minTime, optionList, setOptionList }) => {
+
+    const dispatch = useDispatch()
+    const stopDetails = useSelector(selectAddStopDetails)
 
     const [isAddingStop, setIsAddingStop] = useState(false)
-    const [stopDetails, setStopDetails] = useState({
-        "locationName": "",
-        "passengers": [],
-        "postalCode": 0,
-        "pickupTime": "",
-        "remark": ""
-    })
+    // const [stopDetails, setStopDetails] = useState({
+    //     "locationName": "",
+    //     "passengers": [],
+    //     "postalCode": 0,
+    //     "pickupTime": "",
+    //     "remark": ""
+    // })
 
 
     useEffect(() => {
@@ -27,7 +33,9 @@ const AddStopComponent = ({ pickupList, setPickupList, setMinTime, minTime, opti
     }, [pickupList])
 
     const passengersHandler = (e) => {
-        setStopDetails({...stopDetails, "passengers": [].concat(e)})
+        // setStopDetails({...stopDetails, "passengers": [].concat(e)})
+        console.log(e)
+        dispatch(updatePassengers(e))
     }
 
     const addStopHandler = () => {
@@ -83,15 +91,16 @@ const AddStopComponent = ({ pickupList, setPickupList, setMinTime, minTime, opti
                         setPickupList(() => {
                             return [].concat(temp)
                         })
-                        setStopDetails(() => {
-                            return {
-                                "locationName": "",
-                                "passengers": [],
-                                "postalCode": 0,
-                                "pickupTime": "",
-                                "remark": ""
-                            }
-                        })
+                        // setStopDetails(() => {
+                        //     return {
+                        //         "locationName": "",
+                        //         "passengers": [],
+                        //         "postalCode": 0,
+                        //         "pickupTime": "",
+                        //         "remark": ""
+                        //     }
+                        // })
+                        dispatch(clearStopDetails())
                         setMinTime(() => null)
                         setIsAddingStop(() => false)
                     }
@@ -115,16 +124,16 @@ const AddStopComponent = ({ pickupList, setPickupList, setMinTime, minTime, opti
                         <div className='add_stop_left_column'>
                             <Form.Group className="mb-3">
                                 <Form.Label>Pickup Location Name</Form.Label>
-                                <Form.Control type="text" value={stopDetails.locationName} placeholder="Eg. Oxley Bizhub 2" onChange={(e) => setStopDetails({...stopDetails, "locationName": e.target.value})}  />
+                                <Form.Control type="text" value={stopDetails.locationName} placeholder="Eg. Oxley Bizhub 2" onChange={(e) => dispatch(updateLocationName(e.target.value))}  />
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Postal Code</Form.Label>
-                                <Form.Control type="number" value={stopDetails.postalCode} placeholder="Eg. 408734" onChange={(e) => setStopDetails({...stopDetails, "postalCode": e.target.value})}  />
+                                <Form.Control type="number" value={stopDetails.postalCode} placeholder="Eg. 408734" onChange={(e) => dispatch(updatePostalCode(e.target.value))}  />
                             </Form.Group>
 
                             <Form.Group>
                                 <Form.Label>Pickup Time</Form.Label><br/>
-                                <input type="time" value={stopDetails.pickupTime} onChange={(e) => setStopDetails({...stopDetails, "pickupTime": e.target.value})} />
+                                <input type="time" value={stopDetails.pickupTime} onChange={(e) => dispatch(updatePickupTime(e.target.value))} />
                             </Form.Group>
                         </div>
                         <div className='add_stop_right_column'>
@@ -138,7 +147,7 @@ const AddStopComponent = ({ pickupList, setPickupList, setMinTime, minTime, opti
                                     as="textarea"
                                     rows={2}
                                     id="stop_remark"
-                                    onChange={(e) => setStopDetails({...stopDetails, "remark": e.target.value})} 
+                                    onChange={(e) => dispatch(updateRemark(e.target.value))} 
                                     value={stopDetails.remark}
                                 />
                             </Form.Group>
